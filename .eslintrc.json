@@ -6,6 +6,9 @@
     "extends": [
         "airbnb-base"
     ],
+    "plugins": [
+        "babel"
+    ],
     "parserOptions": {
         "ecmaVersion": 12,
         "sourceType": "module"
