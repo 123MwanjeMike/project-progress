@@ -7,6 +7,9 @@
   "author": "Mike Mwanje <mwanjemike767@gmail.com>",
   "license": "MIT",
   "private": false,
+  "scripts": {
+    "start": "babel-node ./src"
+  },
   "dependencies": {
     "dotenv": "^10.0.0"
   },
