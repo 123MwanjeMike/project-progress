@@ -8,10 +8,15 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "start": "babel-node ./src"
+    "dev": "nodemon --exec babel-node index.js",
+    "dev-test": "jest --watch",
+    "test": "jest --forceExit --detectOpenHandles || true",
+    "start": "babel-node index.js"
   },
   "dependencies": {
-    "dotenv": "^10.0.0"
+    "@octokit/core": "^3.5.1",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.14.8",
@@ -19,13 +24,28 @@
     "@babel/node": "^7.14.9",
     "@babel/preset-env": "^7.15.0",
     "babel-eslint": "^10.1.0",
+    "chai": "^4.3.4",
+    "chai-http": "^4.3.0",
     "eslint": "^7.32.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-babel": "^5.3.1",
     "eslint-plugin-import": "^2.24.1",
     "husky": "^7.0.1",
+    "jest": "^27.1.0",
+    "nodemon": "^2.0.12",
     "prettier": "^2.3.2",
     "pretty-quick": "^3.1.1"
+  },
+  "jest": {
+    "verbose": true,
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/",
+      "/src/"
+    ],
+    "testMatch": [
+      "**/test/**/*.js"
+    ]
   },
   "husky": {
     "hooks": {
