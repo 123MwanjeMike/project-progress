@@ -2,7 +2,7 @@ import { Octokit } from '@octokit/core';
 
 require('dotenv').config();
 
-const octokit = new Octokit({ auth: process.env.PERSONAL_ACCESS_TOKEN });
+const octokit = new Octokit();
 
 exports.ownedProjects = async (req, res) => {
   try {
