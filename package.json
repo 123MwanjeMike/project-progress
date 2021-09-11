@@ -47,5 +47,9 @@
     "testMatch": [
       "**/test/**/*.js"
     ]
+  },"husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
   }
 }
