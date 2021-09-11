@@ -9,8 +9,7 @@ exports.ownedProjects = async (req, res) => {
       {
         username: req.params.username,
         mediaType: {
-          previews: ["inertia"],
-          
+          previews: ['inertia'],
         },
       },
     );
