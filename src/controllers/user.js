@@ -13,6 +13,7 @@ exports.ownedProjects = async (req, res) => {
         },
       },
     );
+    
     return res.status(200).json(projects.data);
   } catch (err) {
     return res.status(500).json({
