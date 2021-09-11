@@ -1,7 +1,5 @@
 import { Octokit } from '@octokit/core';
 
-require('dotenv').config();
-
 const octokit = new Octokit();
 
 exports.ownedProjects = async (req, res) => {

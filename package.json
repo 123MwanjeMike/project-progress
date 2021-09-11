@@ -11,7 +11,8 @@
     "dev": "nodemon --exec babel-node index.js",
     "dev-test": "jest --watch",
     "test": "jest --forceExit --detectOpenHandles || true",
-    "start": "babel-node index.js"
+    "start": "babel-node index.js",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@octokit/core": "^3.5.1",
@@ -46,8 +47,7 @@
     "testMatch": [
       "**/test/**/*.js"
     ]
-  },
-  "husky": {
+  },"husky": {
     "hooks": {
       "pre-commit": "pretty-quick --staged"
     }
