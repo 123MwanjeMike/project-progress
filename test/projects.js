@@ -14,8 +14,8 @@ jest.mock('@octokit/core', () => ({
 }));
 
 describe('project tests', () => {
-  // user-owned project boards
-  it('gets user-owned project boards', (done) => {
+  // user-owned public project boards
+  it('gets user-owned public project boards', (done) => {
     chai
       .request(app)
       .get('/projects/user/USERNAME')
@@ -26,8 +26,8 @@ describe('project tests', () => {
       });
   });
 
-  // organization-wide project boards
-  it('gets organization-wide project boards', (done) => {
+  // organization-wide public project boards
+  it('gets organization-wide public project boards', (done) => {
     chai
       .request(app)
       .get('/projects/org/ORGANIZATION_NAME')

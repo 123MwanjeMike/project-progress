@@ -1,8 +1,9 @@
 import express from 'express';
-import User from '../controllers/projects';
+import Projects from '../controllers/projects';
 
 const router = express.Router();
 
-router.route('/user/:username').get(User.ownedProjects);
+router.route('/user/:username').get(Projects.userOwnedPublic);
+router.route('/org/:organization_name').get(Projects.organizationWidePublic);
 
 module.exports = router;
