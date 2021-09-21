@@ -18,7 +18,7 @@ describe('user tests', () => {
   it('gets user-owned projects', (done) => {
     chai
       .request(app)
-      .get('/user/projects/USERNAME')
+      .get('/projects/user/USERNAME')
       .then((res) => {
         expect(res.statusCode).toBe(200);
         expect(res.body[0]).toHaveProperty('id');
