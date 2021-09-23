@@ -9,18 +9,12 @@ jest.mock('@octokit/core', () => ({
   Octokit: jest.fn().mockImplementation(() => ({
     auth: jest.fn().mockImplementation(() => ({ token: 'token123' })),
     request: jest.fn().mockImplementation(() => ({
-      data: [
-        {
-          id: 1,
-          account: { login: 'octocat', id: 1 },
-          permissions: { metadata: 'read' },
-        },
-      ],
+      data: [{ id: 1, account: { login: 'octocat', id: 1 } }],
     })),
   })),
 }));
 
-describe.skip('index helper tests', () => {
+describe('index helper tests', () => {
   // generates bearer token
   it('generates bearer token', () => {
     expect(typeof generateBearerToken(1)).toBe('string');
