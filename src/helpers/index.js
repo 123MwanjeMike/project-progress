@@ -53,23 +53,23 @@ export const getInstallations = async (res) => {
   }
 };
 
-export const generateInstallationToken = async (req, res, next) => {
+export const retrieveInstallationAccessToken = async (req, res, next) => {
   try {
     const installations = await getInstallations(res);
     const installation = installations.find(
-      (element) => element.account.login === req.query.owner,
+      (element) => element.account.login === req.login,
     );
     if (!installation) {
       return res.status(404).json({
         success: false,
-        message: `No existing installation for ${req.query.owner}`,
+        message: `No existing installation for ${req.login}`,
       });
     }
     const { token } = await octokit.auth({
       type: 'installation',
       installationId: installation.id,
     });
-    req.installationToken = token;
+    req.installationAccessToken = token;
     next();
     return true;
   } catch (err) {

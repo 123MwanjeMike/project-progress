@@ -2,7 +2,7 @@
 import {
   generateBearerToken,
   getInstallations,
-  generateInstallationToken,
+  retrieveInstallationAccessToken,
 } from '../src/helpers';
 
 jest.mock('@octokit/core', () => ({
@@ -30,12 +30,14 @@ describe('index helper tests', () => {
 
   // retrieves installation access token
   it('retrieves installation access token', (done) => {
-    const reqMock = { query: { owner: 'octocat' } };
+    const reqMock = { login: 'octocat' };
     const resMock = {};
     const nextMock = () => jest.fn();
-    generateInstallationToken(reqMock, resMock, nextMock).then((result) => {
-      expect(result).toBe(true);
-      done();
-    });
+    retrieveInstallationAccessToken(reqMock, resMock, nextMock).then(
+      (result) => {
+        expect(result).toBe(true);
+        done();
+      },
+    );
   });
 });
