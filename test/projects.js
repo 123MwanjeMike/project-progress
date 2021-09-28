@@ -5,12 +5,21 @@ import app from '../src';
 
 chai.use(chaiHttp);
 
+// Mock @octokit/core
 jest.mock('@octokit/core', () => ({
   Octokit: jest.fn().mockImplementation(() => ({
     request: jest.fn().mockImplementation(() => ({
       data: [{ id: 12345, state: 'open', node_id: 'node_id' }],
     })),
   })),
+}));
+
+// Mock the retrieveInstallationAccessToken middleware
+jest.mock('../src/helpers', () => ({
+  retrieveInstallationAccessToken: jest.fn((req, res, next) => {
+    req.installationAccessToken = 'installation_access_token';
+    next();
+  }),
 }));
 
 describe('project tests', () => {
