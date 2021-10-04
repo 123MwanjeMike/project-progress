@@ -35,7 +35,7 @@ describe('project tests', () => {
       });
   });
 
-  // get organization-wide public project boards
+  // get all organization-wide project boards
   it('gets organization-wide public project boards', (done) => {
     chai
       .request(app)
@@ -47,11 +47,23 @@ describe('project tests', () => {
       });
   });
 
-  // get repository project boards
+  // get all repository project boards
   it('gets repository project boards', (done) => {
     chai
       .request(app)
       .get('/projects/repo?owner=OWNER&repo=REPOSITORY')
+      .then((res) => {
+        expect(res.statusCode).toBe(200);
+        expect(res.body[0]).toHaveProperty('id');
+        done();
+      });
+  });
+
+  // get specific client project board
+  it.skip('gets specific client project board', (done) => {
+    chai
+      .request(app)
+      .get('/projects/board?owner=OWNER&repo=REPOSITORY')
       .then((res) => {
         expect(res.statusCode).toBe(200);
         expect(res.body[0]).toHaveProperty('id');
