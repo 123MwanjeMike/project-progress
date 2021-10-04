@@ -1,4 +1,5 @@
 import { Octokit } from '@octokit/core';
+import errorHandler from '../helpers/errorHandler';
 
 const octokit = new Octokit();
 
@@ -15,14 +16,7 @@ exports.userOwnedPublic = async (req, res) => {
     );
     return res.status(200).json(data);
   } catch (err) {
-    if (err.response) {
-      return res.status(err.response.status).json({
-        error: err.response.data.message,
-      });
-    }
-    return res.status(500).json({
-      error: 'Server Error',
-    });
+    return errorHandler(err, res);
   }
 };
 
@@ -42,14 +36,7 @@ exports.organizationWide = async (req, res) => {
     );
     return res.status(200).json(data);
   } catch (err) {
-    if (err.response) {
-      return res.status(err.response.status).json({
-        error: err.response.data.message,
-      });
-    }
-    return res.status(500).json({
-      error: 'Server Error',
-    });
+    return errorHandler(err, res);
   }
 };
 
@@ -70,13 +57,6 @@ exports.repositoryProjects = async (req, res) => {
     );
     return res.status(200).json(data);
   } catch (err) {
-    if (err.response) {
-      return res.status(err.response.status).json({
-        error: err.response.data.message,
-      });
-    }
-    return res.status(500).json({
-      error: 'Server Error',
-    });
+    return errorHandler(err, res);
   }
 };

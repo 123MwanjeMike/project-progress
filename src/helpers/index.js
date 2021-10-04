@@ -1,6 +1,7 @@
 import { Octokit } from '@octokit/core';
 import { createAppAuth } from '@octokit/auth-app';
 import jwt from 'jsonwebtoken';
+import errorHandler from './errorHandler';
 
 require('dotenv').config();
 
@@ -42,14 +43,7 @@ export const getInstallations = async (res) => {
     });
     return data;
   } catch (err) {
-    if (err.response) {
-      return res.status(err.response.status).json({
-        error: err.response.data.message,
-      });
-    }
-    return res.status(500).json({
-      error: 'Server Error',
-    });
+    return errorHandler(err, res);
   }
 };
 
@@ -73,13 +67,6 @@ export const retrieveInstallationAccessToken = async (req, res, next) => {
     next();
     return true;
   } catch (err) {
-    if (err.response) {
-      return res.status(err.response.status).json({
-        error: err.response.data.message,
-      });
-    }
-    return res.status(500).json({
-      error: 'Server Error',
-    });
+    return errorHandler(err, res);
   }
 };
