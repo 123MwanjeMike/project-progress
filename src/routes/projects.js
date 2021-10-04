@@ -6,13 +6,13 @@ const router = express.Router();
 
 router.route('/user/:username').get(Projects.userOwnedPublic);
 
-router.route('/org/:ORGANIZATION_NAME').get(
+router.route('/org/:organisationName').get(
   (req, res, next) => {
-    req.login = req.params.ORGANIZATION_NAME;
+    req.login = req.params.organisationName;
     next();
   },
   retrieveInstallationAccessToken,
-  Projects.organizationWidePublic,
+  Projects.organizationWide,
 );
 
 router.route('/repo/').get(

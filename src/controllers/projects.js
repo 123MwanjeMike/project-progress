@@ -26,12 +26,12 @@ exports.userOwnedPublic = async (req, res) => {
   }
 };
 
-exports.organizationWidePublic = async (req, res) => {
+exports.organizationWide = async (req, res) => {
   try {
     const { data } = await octokit.request(
-      `GET /orgs/${req.query.owner}/projects`,
+      `GET /orgs/${req.params.organisationName}/projects`,
       {
-        org: req.query.owner,
+        org: req.params.organisationName,
         headers: {
           authorization: `token ${req.installationAccessToken}`,
         },
