@@ -1,3 +1,4 @@
+import authRoutes from './auth';
 import projectRoutes from './projects';
 
 export default (app) => {
@@ -5,6 +6,7 @@ export default (app) => {
   app.get('/', (req, res) => {
     res.status(200).json({ message: 'Hi! Welcome to project progress 🤸‍♂️🎉🎊' });
   });
+  app.use('/auth', authRoutes);
   app.use('/projects', projectRoutes);
   // For non existent routes
   app.all('*', (req, res) => {
