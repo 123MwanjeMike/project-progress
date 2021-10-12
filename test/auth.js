@@ -23,4 +23,16 @@ describe('auth tests', () => {
         done();
       });
   });
+
+  // aborts identify requests made by third parties
+  it('aborts identify requests made by third parties', (done) => {
+    chai
+      .request(app)
+      .get('/auth/success/?code=123&state=123')
+      .then((res) => {
+        expect(res.statusCode).toBe(401);
+        expect(res.body.error).toBe('Request was created by a third party!');
+        done();
+      });
+  });
 });
