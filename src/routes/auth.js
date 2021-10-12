@@ -3,6 +3,6 @@ import Auth from '../controllers/auth';
 
 const router = express.Router();
 
-router.route('/:username').get(Auth.userIdentity);
+router.route('/login').get(Auth.requestIdentity);
 
 module.exports = router;
