@@ -1,10 +1,14 @@
 import express from 'express';
-import Projects from '../controllers/projects';
+import {
+  userOwnedPublic,
+  organizationWide,
+  repositoryProjects,
+} from '../controllers/projects';
 import { retrieveInstallationAccessToken } from '../helpers';
 
 const router = express.Router();
 
-router.get('/user/:username', Projects.userOwnedPublic);
+router.get('/user/:username', userOwnedPublic);
 router.get(
   '/org/:organisationName',
   (req, res, next) => {
@@ -12,7 +16,7 @@ router.get(
     next();
   },
   retrieveInstallationAccessToken,
-  Projects.organizationWide,
+  organizationWide,
 );
 
 router.get(
@@ -22,7 +26,7 @@ router.get(
     next();
   },
   retrieveInstallationAccessToken,
-  Projects.repositoryProjects,
+  repositoryProjects,
 );
 
 module.exports = router;
