@@ -1,27 +1,32 @@
 import express from 'express';
-import Projects from '../controllers/projects';
+import {
+  userOwnedPublic,
+  organizationWide,
+  repositoryProjects,
+} from '../controllers/projects';
 import { retrieveInstallationAccessToken } from '../helpers';
 
 const router = express.Router();
 
-router.route('/user/:username').get(Projects.userOwnedPublic);
-
-router.route('/org/:organisationName').get(
+router.get('/user/:username', userOwnedPublic);
+router.get(
+  '/org/:organisationName',
   (req, res, next) => {
     req.login = req.params.organisationName;
     next();
   },
   retrieveInstallationAccessToken,
-  Projects.organizationWide,
+  organizationWide,
 );
 
-router.route('/repo/').get(
+router.get(
+  '/repo/',
   (req, res, next) => {
     req.login = req.query.owner;
     next();
   },
   retrieveInstallationAccessToken,
-  Projects.repositoryProjects,
+  repositoryProjects,
 );
 
 module.exports = router;

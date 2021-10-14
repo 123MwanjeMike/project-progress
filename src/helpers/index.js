@@ -1,6 +1,7 @@
 import { Octokit } from '@octokit/core';
 import { createAppAuth } from '@octokit/auth-app';
-import jwt from 'jsonwebtoken';
+import errorHandler from './errorHandler';
+import { generateBearerToken } from '../controllers/auth';
 
 require('dotenv').config();
 
@@ -14,22 +15,6 @@ const octokit = new Octokit({
   },
 });
 
-export const generateBearerToken = (expiryMinutes = 5) => {
-  // Generate the JWT
-  const payload = {
-    // issued at time, 60 seconds in the past to allow for clock drift
-    iat: Math.floor(Date.now() / 1000),
-    // JWT expiration time (10 minute maximum)
-    exp: Math.floor(Date.now() / 1000) + expiryMinutes * 60,
-    // GitHub App's identifier
-    iss: process.env.APP_ID,
-  };
-
-  return jwt.sign(payload, process.env.PRIVATE_KEY.replace(/\\n/g, '\n'), {
-    algorithm: 'RS256',
-  });
-};
-
 export const getInstallations = async (res) => {
   try {
     const { data } = await octokit.request('GET /app/installations', {
@@ -42,14 +27,7 @@ export const getInstallations = async (res) => {
     });
     return data;
   } catch (err) {
-    if (err.response) {
-      return res.status(err.response.status).json({
-        error: err.response.data.message,
-      });
-    }
-    return res.status(500).json({
-      error: 'Server Error',
-    });
+    return errorHandler(err, res);
   }
 };
 
@@ -73,13 +51,6 @@ export const retrieveInstallationAccessToken = async (req, res, next) => {
     next();
     return true;
   } catch (err) {
-    if (err.response) {
-      return res.status(err.response.status).json({
-        error: err.response.data.message,
-      });
-    }
-    return res.status(500).json({
-      error: 'Server Error',
-    });
+    return errorHandler(err, res);
   }
 };

@@ -16,6 +16,8 @@ Sentry.init({
   tracesSampleRate: 1.0,
 });
 
+global.userAccessToken = null;
+
 app.use(express.json());
 app.use(Sentry.Handlers.requestHandler());
 app.use(Sentry.Handlers.tracingHandler());
