@@ -1,4 +1,5 @@
 import { Octokit } from '@octokit/core';
+import jwt from 'jsonwebtoken';
 import errorHandler from '../helpers/errorHandler';
 
 require('dotenv').config();
@@ -6,7 +7,19 @@ require('dotenv').config();
 const octokit = new Octokit();
 const stateString = (Math.random() + 1).toString(36).substring(7);
 
-exports.requestIdentity = async (req, res) => {
+export const generateBearerToken = (expiryMinutes = 5) => {
+  const payload = {
+    iat: Math.floor(Date.now() / 1000),
+    exp: Math.floor(Date.now() / 1000) + expiryMinutes * 60,
+    iss: process.env.APP_ID,
+  };
+
+  return jwt.sign(payload, process.env.PRIVATE_KEY.replace(/\\n/g, '\n'), {
+    algorithm: 'RS256',
+  });
+};
+
+export const requestIdentity = async (req, res) => {
   try {
     const clientId = process.env.CLIENT_ID;
     const redirectUri = 'http://localhost:3000/auth/success';
@@ -21,7 +34,7 @@ exports.requestIdentity = async (req, res) => {
   }
 };
 
-exports.userIdentity = async (req, res) => {
+export const userIdentity = async (req, res) => {
   try {
     if (req.query.state !== stateString) {
       return res

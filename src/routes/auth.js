@@ -1,9 +1,9 @@
 import express from 'express';
-import Auth from '../controllers/auth';
+import { requestIdentity, userIdentity } from '../controllers/auth';
 
 const router = express.Router();
 
-router.route('/login').get(Auth.requestIdentity);
-router.route('/success').get(Auth.userIdentity);
+router.get('/login', requestIdentity);
+router.get('/success', userIdentity);
 
 module.exports = router;

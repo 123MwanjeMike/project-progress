@@ -1,6 +1,5 @@
 /* eslint-disable no-undef */
 import {
-  generateBearerToken,
   getInstallations,
   retrieveInstallationAccessToken,
 } from '../src/helpers';
@@ -15,11 +14,6 @@ jest.mock('@octokit/core', () => ({
 }));
 
 describe('index helper tests', () => {
-  // generates bearer token
-  it('generates bearer token', () => {
-    expect(typeof generateBearerToken(1)).toBe('string');
-  });
-
   // gets its installations
   it('gets its installations', (done) => {
     getInstallations().then((result) => {

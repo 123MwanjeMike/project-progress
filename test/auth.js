@@ -2,6 +2,7 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../src';
+import { generateBearerToken } from '../src/controllers/auth';
 
 chai.use(chaiHttp);
 
@@ -23,6 +24,10 @@ jest.mock('@octokit/core', () => ({
 
 describe('auth tests', () => {
   let state = null;
+  // generates bearer token
+  it('generates bearer token', () => {
+    expect(typeof generateBearerToken(1)).toBe('string');
+  });
 
   // request user identity
   it('requests user identity', (done) => {

@@ -4,9 +4,9 @@ import { retrieveInstallationAccessToken } from '../helpers';
 
 const router = express.Router();
 
-router.route('/user/:username').get(Projects.userOwnedPublic);
-
-router.route('/org/:organisationName').get(
+router.get('/user/:username', Projects.userOwnedPublic);
+router.get(
+  '/org/:organisationName',
   (req, res, next) => {
     req.login = req.params.organisationName;
     next();
@@ -15,7 +15,8 @@ router.route('/org/:organisationName').get(
   Projects.organizationWide,
 );
 
-router.route('/repo/').get(
+router.get(
+  '/repo/',
   (req, res, next) => {
     req.login = req.query.owner;
     next();
