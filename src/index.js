@@ -16,12 +16,18 @@ Sentry.init({
   tracesSampleRate: 1.0,
 });
 
-global.userAccessToken = null;
-
 app.use(express.json());
 app.use(Sentry.Handlers.requestHandler());
 app.use(Sentry.Handlers.tracingHandler());
 app.use(express.urlencoded({ extended: true }));
+app.use((req, res, next) => {
+  req.headers = req.headers.authorization
+    ? {
+        authorization: `token ${req.headers.authorization.split(' ')[1]}`,
+      }
+    : {};
+  next();
+});
 
 configRoutes(app);
 

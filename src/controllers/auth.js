@@ -52,8 +52,6 @@ export const userIdentity = async (req, res) => {
       },
     );
 
-    global.userAccessToken = data.access_token;
-
     return res
       .status(200)
       .json({ message: 'Login successful', token: data.access_token });
