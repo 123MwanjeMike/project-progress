@@ -3,6 +3,24 @@ import errorHandler from '../helpers/errorHandler';
 
 const octokit = new Octokit();
 
+export const singleProject = async (req, res) => {
+  try {
+    const { data } = await octokit.request(
+      `GET /projects/${req.params.project_id}`,
+      {
+        project_id: req.params.project_id,
+        headers: req.headers,
+        mediaType: {
+          previews: ['inertia'],
+        },
+      },
+    );
+    return res.status(200).json(data);
+  } catch (err) {
+    return errorHandler(err, res);
+  }
+};
+
 export const userOwnedPublic = async (req, res) => {
   try {
     const { data } = await octokit.request(

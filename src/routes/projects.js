@@ -1,5 +1,6 @@
 import express from 'express';
 import {
+  singleProject,
   userOwnedPublic,
   organizationWide,
   repositoryProjects,
@@ -7,6 +8,7 @@ import {
 
 const router = express.Router();
 
+router.get('/:project_id', singleProject);
 router.get('/user/:username', userOwnedPublic);
 router.get('/org/:organisationName', organizationWide);
 router.get('/repo/', repositoryProjects);

@@ -60,13 +60,12 @@ describe('project tests', () => {
   });
 
   // get specific client project board
-  it.skip('gets specific client project board', (done) => {
+  it('gets specific client project board', (done) => {
     chai
       .request(app)
-      .get('/projects/board?owner=OWNER&repo=REPOSITORY')
+      .get('/projects/PROJECT_ID')
       .then((res) => {
         expect(res.statusCode).toBe(200);
-        expect(res.body[0]).toHaveProperty('id');
         done();
       });
   });
