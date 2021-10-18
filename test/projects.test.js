@@ -66,7 +66,6 @@ describe('project tests', () => {
       .get('/projects/PROJECT_ID')
       .then((res) => {
         expect(res.statusCode).toBe(200);
-        expect(res.body).toHaveProperty('id');
         done();
       });
   });
