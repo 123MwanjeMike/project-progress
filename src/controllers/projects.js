@@ -26,9 +26,7 @@ export const organizationWide = async (req, res) => {
       `GET /orgs/${req.params.organisationName}/projects`,
       {
         org: req.params.organisationName,
-        headers: {
-          authorization: `token ${req.installationAccessToken}`,
-        },
+        headers: req.headers,
         mediaType: {
           previews: ['inertia'],
         },
@@ -47,9 +45,7 @@ export const repositoryProjects = async (req, res) => {
       {
         owner: req.query.owner,
         repo: req.query.repo,
-        headers: {
-          authorization: `token ${req.installationAccessToken}`,
-        },
+        headers: req.headers,
         mediaType: {
           previews: ['inertia'],
         },
