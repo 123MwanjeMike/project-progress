@@ -51,7 +51,7 @@
       "/src/"
     ],
     "testMatch": [
-      "**/test/**/*.js"
+      "**/test/**/*test.js"
     ]
   },
   "husky": {
