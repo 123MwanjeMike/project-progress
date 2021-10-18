@@ -37,9 +37,7 @@ describe('auth tests', () => {
       .redirects(0)
       .end((err, res) => {
         expect(res.statusCode).toBe(302);
-        expect(res.headers.location).toContain(
-          'http://localhost:3000/auth/success',
-        );
+        expect(res.headers.location).toContain('/auth/success');
         expect(res.headers.location).toContain(
           'https://github.com/login/oauth/authorize/?client_id=',
         );
