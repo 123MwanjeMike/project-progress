@@ -22,7 +22,7 @@ export const generateBearerToken = (expiryMinutes = 5) => {
 export const requestIdentity = async (req, res) => {
   try {
     const clientId = process.env.CLIENT_ID;
-    const redirectUri = 'http://localhost:3000/auth/success';
+    const redirectUri = `${process.env.BASE_URL}/auth/success`;
 
     return res
       .status(302)
