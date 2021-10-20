@@ -3,7 +3,7 @@ import errorHandler from '../helpers/errorHandler';
 
 const octokit = new Octokit();
 
-export const allColumns = async (req, res) => {
+const projectColumns = async (req, res) => {
   try {
     const { data } = await octokit.request(
       `GET /projects/${req.params.project_id}/columns`,
@@ -15,25 +15,24 @@ export const allColumns = async (req, res) => {
         },
       },
     );
-    return res.status(200).json(data);
+    return data;
   } catch (err) {
     return errorHandler(err, res);
   }
 };
 
-export const repositoryProjects = async (req, res) => {
+export const allColumns = async (req, res) => {
   try {
-    const { data } = await octokit.request(
-      `GET /repos/${req.query.owner}/${req.query.repo}/projects`,
-      {
-        owner: req.query.owner,
-        repo: req.query.repo,
-        headers: req.headers,
-        mediaType: {
-          previews: ['inertia'],
-        },
-      },
-    );
+    const columns = await projectColumns(req, res);
+    return res.status(200).json(columns);
+  } catch (err) {
+    return errorHandler(err, res);
+  }
+};
+
+export const toDoColumn = async (req, res) => {
+  try {
+    const { data } = { data: 1 };
     return res.status(200).json(data);
   } catch (err) {
     return errorHandler(err, res);
