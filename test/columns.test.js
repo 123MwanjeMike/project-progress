@@ -11,12 +11,28 @@ jest.mock('@octokit/core', () => ({
     request: jest.fn().mockImplementation(() => ({
       data: [
         {
-          url: 'https://api.github.com/projects/columns/367',
+          url: 'https://api.github.com/projects/columns/1',
           project_url: 'https://api.github.com/projects/120',
-          cards_url: 'https://api.github.com/projects/columns/367/cards',
-          id: 367,
+          cards_url: 'https://api.github.com/projects/columns/1/cards',
+          id: 1,
           node_id: 'MDEzOlByb2plY3RDb2x1bW4zNjc=',
           name: 'To Do',
+        },
+        {
+          url: 'https://api.github.com/projects/columns/2',
+          project_url: 'https://api.github.com/projects/120',
+          cards_url: 'https://api.github.com/projects/columns/2/cards',
+          id: 2,
+          node_id: 'MDEzOlByWEWDCUYDb2x1bW4zNjc&',
+          name: 'In progress',
+        },
+        {
+          url: 'https://api.github.com/projects/columns/3',
+          project_url: 'https://api.github.com/projects/120',
+          cards_url: 'https://api.github.com/projects/columns/3/cards',
+          id: 3,
+          node_id: 'MDEzOlByb2SJBEx1bW4zN8CYSUDF',
+          name: 'Done',
         },
       ],
     })),
@@ -32,6 +48,18 @@ describe('column tests', () => {
       .then((res) => {
         expect(res.statusCode).toBe(200);
         expect(res.body[0]).toHaveProperty('cards_url');
+        done();
+      });
+  });
+
+  // get 'TODO' project column
+  it("get 'TODO' project column", (done) => {
+    chai
+      .request(app)
+      .get('/columns/todo')
+      .then((res) => {
+        expect(res.statusCode).toBe(200);
+        expect(res.body.id).toHaveProperty(1);
         done();
       });
   });
