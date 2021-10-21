@@ -53,13 +53,13 @@ describe('column tests', () => {
   });
 
   // get 'TODO' project column
-  it.skip("get 'TODO' project column", (done) => {
+  it("get 'TODO' project column", (done) => {
     chai
       .request(app)
       .get('/columns/PROJECT_ID/todo')
       .then((res) => {
         expect(res.statusCode).toBe(200);
-        expect(res.body.id).toHaveProperty(1);
+        expect(res.body.id).toBe(1);
         done();
       });
   });

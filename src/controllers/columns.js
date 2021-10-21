@@ -32,8 +32,8 @@ export const allColumns = async (req, res) => {
 
 export const toDoColumn = async (req, res) => {
   try {
-    const { data } = { data: 1 };
-    return res.status(200).json(data);
+    const [firstColumn] = await projectColumns(req, res);
+    return res.status(200).json(firstColumn);
   } catch (err) {
     return errorHandler(err, res);
   }
