@@ -63,4 +63,16 @@ describe('column tests', () => {
         done();
       });
   });
+
+  // get 'DONE' project column
+  it("get 'DONE' project column", (done) => {
+    chai
+      .request(app)
+      .get('/columns/PROJECT_ID/done')
+      .then((res) => {
+        expect(res.statusCode).toBe(200);
+        expect(res.body.id).toBe(3);
+        done();
+      });
+  });
 });
