@@ -38,3 +38,13 @@ export const toDoColumn = async (req, res) => {
     return errorHandler(err, res);
   }
 };
+
+export const doneColumn = async (req, res) => {
+  try {
+    const columns = await projectColumns(req, res);
+    const lastColumn = columns[columns.length - 1];
+    return res.status(200).json(lastColumn);
+  } catch (err) {
+    return errorHandler(err, res);
+  }
+};
