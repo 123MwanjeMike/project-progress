@@ -76,16 +76,4 @@ describe('card tests', () => {
         done();
       });
   });
-
-  // total number of cards in project board
-  it.skip('total number of cards in project board', (done) => {
-    chai
-      .request(app)
-      .get('/cards/total')
-      .then((res) => {
-        expect(res.statusCode).toBe(200);
-        expect(res.body.total_number_of_cards).toBe(1);
-        done();
-      });
-  });
 });
