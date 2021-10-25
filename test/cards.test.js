@@ -72,7 +72,7 @@ describe('card tests', () => {
       .get('/cards/total')
       .then((res) => {
         expect(res.statusCode).toBe(200);
-        expect(res.body.number_of_cards).toBe(1);
+        expect(res.body.total_number_of_cards).toBe(1);
         done();
       });
   });
