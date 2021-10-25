@@ -64,4 +64,16 @@ describe('card tests', () => {
         done();
       });
   });
+
+  // number of cards in project column
+  it('number of cards in project column', (done) => {
+    chai
+      .request(app)
+      .get('/cards/COLUMN_ID')
+      .then((res) => {
+        expect(res.statusCode).toBe(200);
+        expect(res.body.number_of_cards).toBe(1);
+        done();
+      });
+  });
 });
