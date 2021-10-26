@@ -3,4 +3,4 @@
 
 # project-progress
 
-This application will interact with the github api to track project progress
+This application gives you a graphical visaulization of the progress status of your Github project board.
